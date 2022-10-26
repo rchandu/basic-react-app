@@ -1,4 +1,4 @@
-export const mockApiResponse = [
+export const mockGHResponse = [
   {
     id: 4967118,
     node_id: 'MDEwOlJlcG9zaXRvcnk0OTY3MTE4',
