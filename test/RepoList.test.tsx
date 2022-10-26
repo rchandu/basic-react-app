@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { mockGHResponse } from '../src/mockData';
+import { mockGHResponse } from './mockData';
 import { RepoList } from '../src/repo-list/RepoList';
 
 const [mockRepoItem] = mockGHResponse;

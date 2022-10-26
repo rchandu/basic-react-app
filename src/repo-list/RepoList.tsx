@@ -1,4 +1,4 @@
-import { IGithubRepo } from '../DataTypes';
+import { IGithubRepo } from '../utils/DataTypes';
 import { RepoListItem } from './RepoListItem';
 
 interface Props {

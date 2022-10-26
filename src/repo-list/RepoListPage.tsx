@@ -1,6 +1,6 @@
 import useSWR from 'swr';
-import { IGithubRepo } from '../DataTypes';
-import { fetcher, REPO_LIST_API } from '../utils';
+import { IGithubRepo } from '../utils/DataTypes';
+import { fetcher, REPO_LIST_API } from '../utils/utils';
 import { RepoList } from './RepoList';
 
 const RepoListPage: React.FC = () => {
