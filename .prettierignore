@@ -1,0 +1,32 @@
+.gitignore
+
+yarn.lock
+.next
+.docz
+node_modules/
+.fabric
+public/static
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# docz
+/.docz/
+
+# sw
+**/public/workbox-*.js
+**/public/workbox-*.js.map
+**/public/sw.js
+**/public/sw.js.map
+
+# storybook
+storybook-static/
+
+# IDE files
+.idea/
+
+
+# Environment files
+*.env*
