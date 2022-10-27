@@ -104,7 +104,7 @@ export interface IGithubRepo {
   archived: boolean;
   disabled: boolean;
   open_issues_count: number;
-  license: IRepoLicense;
+  license: IRepoLicense | null;
   allow_forking: boolean;
   is_template: boolean;
   web_commit_signoff_required: boolean;

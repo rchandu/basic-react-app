@@ -49,14 +49,17 @@ const FieldsToShow: FieldAccessor[] = [
   {
     key: 'license',
     label: 'License',
-    accessorFn: (license: IRepoLicense) => (
-      <div>
-        {license.name}
-        <a href={license.url} target="_blank">
-          &nbsp;(Link)
-        </a>
-      </div>
-    )
+    accessorFn: (license: IRepoLicense | null) => {
+      if (!license) return '-';
+      return (
+        <div>
+          {license.name}
+          <a href={license.url} target="_blank">
+            &nbsp;(Link)
+          </a>
+        </div>
+      );
+    }
   },
   { key: 'private', label: 'Is private', accessorFn: rendYesNo },
   { key: 'forks_count', label: 'Forks count' },
@@ -78,13 +81,18 @@ export const RepoDetail: React.FC<Props> = ({ repoDetail }) => {
       <tbody>
         {FieldsToShow.map((currField) => {
           const currFieldValue = repoDetail[currField.key];
-          const value = currField.accessorFn
-            ? currField.accessorFn(currFieldValue)
-            : currFieldValue;
+          let valueEl = null;
+          if (!currFieldValue) {
+            valueEl = '-';
+          } else if (currField.accessorFn) {
+            valueEl = currField.accessorFn(currFieldValue);
+          } else {
+            valueEl = currFieldValue;
+          }
           return (
             <tr key={currField.key}>
               <td>{currField.label}</td>
-              <td>{value}</td>
+              <td>{valueEl}</td>
             </tr>
           );
         })}
