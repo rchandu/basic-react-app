@@ -8,7 +8,6 @@ const RepoListPage = () => {
 
   if (isFetching) return <div>Fetching data ...</div>;
   if (error) return <div>Failed to load</div>;
-
   return <RepoList repoList={orgRepos} />;
 };
 
