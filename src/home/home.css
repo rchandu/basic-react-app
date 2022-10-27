@@ -4,13 +4,13 @@
   gap: 16px;
 }
 
-a {
+.home a {
   padding: 16px 16px;
   border-radius: 8px;
   max-width: max-content;
   background-color: #1c1c1c;
 }
-a:hover {
+
+.home a:hover {
   background-color: #000;
-  color: white;
 }
