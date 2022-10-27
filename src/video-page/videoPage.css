@@ -1,0 +1,61 @@
+.videoPage {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(33, 33, 33, 0.98);
+  min-height: 100vh;
+  height: 100%;
+}
+
+.videoPageHeader {
+  height: 56px;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  align-items: stretch;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.videoPageHeaderIcon {
+  height: 20px;
+  fill: white;
+  width: 90px;
+  padding: 18px 14px 18px 16px;
+  flex: none;
+}
+
+.videoPageHeaderSearch {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.videoPageHeaderSearchInput {
+  height: 50%;
+  width: 70%;
+  background-color: hsl(0, 0%, 7%);
+  padding: 2px 6px;
+  border: 1px solid hsl(0, 0%, 18.82%);
+  border-radius: 2px 0 0 2px;
+  box-shadow: inset 0 1px 2px hsla(0, 0%, 0%, 0);
+  color: hsla(0, 100%, 100%, 0.88);
+  outline: none;
+}
+
+.videoPageHeaderSearchInput input:focus {
+  border: 1px solid #1c62b9;
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 30%);
+}
+
+.videoPageBody {
+  padding: 24px;
+}
+
+.videoList {
+  display: grid;
+}
+
+.videoItem {
+  background-color: red;
+}

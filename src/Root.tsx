@@ -15,13 +15,13 @@ export function Root() {
           <Routes>
             <Route path="/" element={<App />}>
               <Route index element={<HomePage />} />
-              <Route path="/videos" element={<VideoPage />} />
               <Route path="/repos/:orgName" element={<RepoListPage />} />
               <Route
                 path="/repo/:owner/:repoName"
                 element={<RepoDetailPage />}
               />
             </Route>
+            <Route path="/videos" element={<VideoPage />} />
             <Route
               path="*"
               element={
