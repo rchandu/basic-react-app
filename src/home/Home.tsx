@@ -6,7 +6,7 @@ const HomePage: FC = () => {
     <div>
       <Link
         to="/repos"
-        className="bg-blue-500 hover:bg-blue-200 text-white p-4 rounded"
+        className="bg-blue-500 hover:bg-blue-200 text-white py-4 px-8 rounded-lg"
       >
         Go to repos page
       </Link>

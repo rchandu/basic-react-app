@@ -1,10 +1,10 @@
-import { render } from '@testing-library/react';
+import { render } from './test-utils';
 import { mockGHResponse } from './mockData';
 import { RepoListItem } from '../src/repo-list/RepoListItem';
 
 const mockRepoData = mockGHResponse[0];
 
-describe('Test repo list item', () => {
+describe('RepoListItem', () => {
   it('Should show name', () => {
     const { getByText } = render(<RepoListItem repo={mockRepoData} />);
     expect(getByText(mockRepoData.name)).toBeDefined();

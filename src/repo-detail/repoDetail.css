@@ -1,0 +1,9 @@
+.repoDetail {
+  border: 1px solid #e6e6e6;
+  border-collapse: collapse;
+}
+
+.repoDetail td {
+  border: 1px solid #e6e6e6;
+  padding: 8px 16px;
+}

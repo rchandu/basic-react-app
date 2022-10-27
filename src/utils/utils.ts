@@ -7,4 +7,9 @@ export const fetcher = async (
   return res.json();
 };
 
-export const REPO_LIST_API = 'https://api.github.com/orgs/godaddy/repos';
+export const GH_API_ROOT = 'https://api.github.com/';
+export const REPO_LIST_API = `${GH_API_ROOT}/orgs/godaddy/repos`;
+
+export const getOrgReposApi = (orgName: string) =>
+  `${GH_API_ROOT}orgs/${orgName}/repos`;
+export const getRepoDetailApi = (name: string) => `${GH_API_ROOT}repos/${name}`;

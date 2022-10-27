@@ -1,12 +1,16 @@
+import { useParams } from 'react-router-dom';
 import useSWR from 'swr';
 import { IGithubRepo } from '../utils/DataTypes';
-import { fetcher, REPO_LIST_API } from '../utils/utils';
+import { fetcher, getOrgReposApi } from '../utils/utils';
 import { RepoList } from './RepoList';
 
 const RepoListPage: React.FC = () => {
-  const { data, error } = useSWR<IGithubRepo[], any>(REPO_LIST_API, fetcher, {
-    suspense: true
-  });
+  const { orgName = '' } = useParams();
+  const { data, error } = useSWR<IGithubRepo[]>(
+    getOrgReposApi(orgName),
+    fetcher,
+    { suspense: true }
+  );
 
   if (error || !data) return <div>failed to load</div>;
 
