@@ -1,0 +1,16 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+a {
+  padding: 16px 16px;
+  border-radius: 8px;
+  max-width: max-content;
+  background-color: #1c1c1c;
+}
+a:hover {
+  background-color: #000;
+  color: white;
+}
