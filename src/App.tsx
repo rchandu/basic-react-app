@@ -27,6 +27,12 @@ export const App = () => {
         { label: 'Repo Detail', path: pathName }
       ];
     }
+    if (pathName === '/videos') {
+      return [
+        { label: 'Home', path: '/' },
+        { label: 'Videos', path: pathName }
+      ];
+    }
     return [];
   }, [location]);
 

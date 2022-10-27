@@ -5,6 +5,7 @@ import { App } from './App';
 const HomePage = React.lazy(() => import('./home/Home'));
 const RepoListPage = React.lazy(() => import('./repo-list/RepoListPage'));
 const RepoDetailPage = React.lazy(() => import('./repo-detail/RepoDetailPage'));
+const VideoPage = React.lazy(() => import('./video-page/VideoPage'));
 
 export function Root() {
   return (
@@ -14,6 +15,7 @@ export function Root() {
           <Routes>
             <Route path="/" element={<App />}>
               <Route index element={<HomePage />} />
+              <Route path="/videos" element={<VideoPage />} />
               <Route path="/repos/:orgName" element={<RepoListPage />} />
               <Route
                 path="/repo/:owner/:repoName"

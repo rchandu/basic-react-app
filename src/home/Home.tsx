@@ -7,6 +7,7 @@ const HomePage: FC = () => {
     <div className='home'>
       <Link to="/repos/godaddy">Go daddy repos</Link>
       <Link to="/repos/unacademy">Unacademy repos</Link>
+      <Link to="/videos">Videos home</Link>
     </div>
   );
 };
