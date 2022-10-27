@@ -4,33 +4,6 @@ import { getOrgReposApi, getRepoDetailApi } from '../utils/utils';
 
 const repoInfoMap: Map<string, IGithubRepo> = new Map();
 const orgRepoListMap: Map<string, IGithubRepo[]> = new Map();
-const responseCache: Map<string, any> = new Map();
-
-function useFetchData<ReturnType>(fetchUrl: string) {
-  const [isFetching, setIsFetching] = useState(true);
-  const [data, setData] = useState<ReturnType | null>(null);
-  const [error, setError] = useState<any | null>(null);
-
-  useEffect(() => {
-    setIsFetching(true);
-    console.log('Making the call');
-    if (responseCache.has(fetchUrl)) {
-      setData(responseCache.get(fetchUrl));
-      setIsFetching(false);
-    } else {
-      fetch(fetchUrl)
-        .then((res) => res.json())
-        .then((data: ReturnType) => {
-          responseCache.set(fetchUrl, data);
-          setData(data);
-        })
-        .catch((err) => setError(err))
-        .finally(() => setIsFetching(false));
-    }
-  }, [fetchUrl]);
-
-  return [isFetching, data, error];
-}
 
 export const useFetchOrgRepos = (orgName: string) => {
   const [isFetching, setIsFetching] = useState(true);
@@ -47,8 +20,9 @@ export const useFetchOrgRepos = (orgName: string) => {
       console.log('Making the call');
       fetch(getOrgReposApi(orgName))
         .then((res) => res.json())
-        .then((data) => {
+        .then((data: IGithubRepo[]) => {
           orgRepoListMap.set(orgName, data);
+          data.forEach((x) => repoInfoMap.set(x.full_name, x));
           setData(data);
         })
         .catch((err) => setError(err))
@@ -58,6 +32,29 @@ export const useFetchOrgRepos = (orgName: string) => {
 
   return [isFetching, data, error];
 };
+export const useFetchRepoDetail = (repoName: string) => {
+  const [isFetching, setIsFetching] = useState(true);
+  const [data, setData] = useState<IGithubRepo | null>(null);
+  const [error, setError] = useState<any | null>(null);
 
-export const useFetchRepoDetail = (repoName: string) =>
-  useFetchData<IGithubRepo>(getRepoDetailApi(repoName));
+  useEffect(() => {
+    setIsFetching(true);
+    const existingData = repoInfoMap.get(repoName);
+    if (existingData) {
+      setData(existingData);
+      setIsFetching(false);
+    } else {
+      console.log('Making the call');
+      fetch(getRepoDetailApi(repoName))
+        .then((res) => res.json())
+        .then((data) => {
+          repoInfoMap.set(repoName, data);
+          setData(data);
+        })
+        .catch((err) => setError(err))
+        .finally(() => setIsFetching(false));
+    }
+  }, [repoName]);
+
+  return [isFetching, data, error];
+};
