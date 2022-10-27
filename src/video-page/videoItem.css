@@ -1,0 +1,9 @@
+.videoItem {
+  width: 30%;
+}
+
+.videoItem img {
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+}

@@ -1,5 +1,7 @@
 import { sampleVideoData } from '../data/videosData';
+import { VideoItem } from './VideoItem';
 import './videoPage.css';
+import { VideoPlayer } from './VideoPlayer';
 import { YoutubeIcon } from './YoutubeIcon';
 
 export const VideoPage: React.FC = () => {
@@ -17,12 +19,11 @@ export const VideoPage: React.FC = () => {
           />
         </div>
       </div>
+      <VideoPlayer />
       <div className="videoPageBody">
         <div className="videoList">
           {sampleVideoData.map((x) => (
-            <div className="videoItem">
-              <img src={x.thumbnail_url} alt="Image thumbnail" />
-            </div>
+            <VideoItem key={x.personalization_id} item={x} />
           ))}
         </div>
       </div>
