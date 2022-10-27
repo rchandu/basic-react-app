@@ -1,7 +1,5 @@
 import React, { useMemo } from 'react';
-import {
-  Link, Outlet, useLocation, useNavigate
-} from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import './App.css';
 
 interface Paths {
@@ -34,25 +32,30 @@ export const App = () => {
 
   return (
     <div className="app">
-      <div className="navbar">
-        {!isHome && (
-          <Link to="" onClick={() => navigate(-1)}>
-            ⬅
-          </Link>
-        )}
-        {pathnameList.map((x, idx) => {
-          const isLast = idx === pathnameList.length - 1;
-          return (
-            <React.Fragment key={x.path}>
-              <Link to={x.path} key={x.path}>
-                {x.label}
+      {!isHome && (
+        <div className="navbar">
+          {!isHome && (
+            <>
+              <Link to="" onClick={() => navigate(-1)}>
+                {'<'} Back
               </Link>
-              {!isLast && <span>/</span>}
-              {isLast}
-            </React.Fragment>
-          );
-        })}
-      </div>
+              <span>/</span>
+            </>
+          )}
+          {pathnameList.map((x, idx) => {
+            const isLast = idx === pathnameList.length - 1;
+            return (
+              <React.Fragment key={x.path}>
+                <Link to={x.path} key={x.path}>
+                  {x.label}
+                </Link>
+                {!isLast && <span>/</span>}
+                {isLast}
+              </React.Fragment>
+            );
+          })}
+        </div>
+      )}
       <Outlet />
     </div>
   );

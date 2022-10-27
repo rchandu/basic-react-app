@@ -65,6 +65,7 @@ const FieldsToShow: FieldAccessor[] = [
   { key: 'forks_count', label: 'Forks count' },
   { key: 'allow_forking', label: 'Allows forks', accessorFn: rendYesNo },
   { key: 'open_issues_count', label: 'Open issues' },
+  { key: 'watchers_count', label: 'Watchers' },
   { key: 'has_wiki', label: 'Has wiki', accessorFn: rendYesNo },
   { key: 'has_downloads', label: 'Has downloads', accessorFn: rendYesNo },
   { key: 'has_pages', label: 'Has pages', accessorFn: rendYesNo },
@@ -82,7 +83,7 @@ export const RepoDetail: React.FC<Props> = ({ repoDetail }) => {
         {FieldsToShow.map((currField) => {
           const currFieldValue = repoDetail[currField.key];
           let valueEl = null;
-          if (!currFieldValue) {
+          if (currFieldValue === undefined || currFieldValue === null) {
             valueEl = '-';
           } else if (currField.accessorFn) {
             valueEl = currField.accessorFn(currFieldValue);

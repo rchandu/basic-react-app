@@ -10,7 +10,12 @@ const RepoDetailPage: React.FC = () => {
 
   if (isFetching) return <div>Fetching data ...</div>;
   if (error) return <div>Failed to load</div>;
-  return <RepoDetail repoDetail={repoDetail} />;
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <h2>Repo: {fullRepoName}</h2>
+      <RepoDetail repoDetail={repoDetail} />
+    </div>
+  );
 };
 
 export default RepoDetailPage;

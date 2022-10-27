@@ -1,16 +1,32 @@
 .home {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 16px;
 }
 
 .home a {
-  padding: 16px 16px;
-  border-radius: 8px;
+  padding: 8px 16px;
+  border-radius: 6px;
   max-width: max-content;
   background-color: #1c1c1c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+  min-width: 200px;
 }
 
 .home a:hover {
   background-color: #000;
+}
+
+@media (prefers-color-scheme: light) {
+  .home a {
+    color: white;
+    background-color: #3e3e3e;
+  }
+
+  .home a:hover {
+    background-color: #000;
+  }
 }

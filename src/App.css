@@ -14,13 +14,21 @@
 }
 
 .navbar {
-  min-height: 40px;
   display: flex;
+  align-items: center;
   gap: 16px;
+  margin-bottom: 36px;
 }
 
 .navbar a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: white;
+  background-color: #555;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: bold;
 }
 
 .navbar a:hover {
@@ -30,4 +38,11 @@
 .navbar a:last-child {
   cursor: default;
   text-decoration: none;
+}
+
+@media (prefers-color-scheme: light) {
+  .navbar a {
+    color: black;
+    background-color: #eee;
+  }
 }

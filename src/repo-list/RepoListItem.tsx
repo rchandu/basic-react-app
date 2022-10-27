@@ -7,12 +7,24 @@ interface Props {
 
 export const RepoListItem: React.FC<Props> = ({ repo }) => {
   return (
-    <div>
-      <div>{repo.name}</div>
-      <div>{repo.full_name}</div>
-      <Link to={`/repo/${repo.full_name}`} className="subtitle">
-        Show repo info
-      </Link>
+    <div className="repoListItem">
+      <div className="body">
+        <div className="title">{repo.name}</div>
+        <div className="stats">
+          <div className="stars">{repo.stargazers_count ?? 0} ⭐</div>
+          <span>|</span>
+          <div className="openIssues">{repo.open_issues_count ?? 0} issues</div>
+        </div>
+        <div>Created on: {new Date(repo.created_at).toDateString()}</div>
+      </div>
+      <div className="actions">
+        <a href={repo.html_url} target="_blank" className="actionItem">
+          Repo link
+        </a>
+        <Link className="actionItem" to={`/repo/${repo.full_name}`}>
+          Repo details
+        </Link>
+      </div>
     </div>
   );
 };
