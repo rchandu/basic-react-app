@@ -38,7 +38,12 @@ const FieldsToShow: FieldAccessor[] = [
     label: 'Owner',
     accessorFn: (owner: IRepoOwner) => (
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-        <img src={owner.avatar_url} height={40} width={40} />
+        <img
+          data-testid="owner_image"
+          src={owner.avatar_url}
+          height={40}
+          width={40}
+        />
         {`${owner.type} / ${owner.login}`}
         <a href={owner.html_url} target="_blank">
           &nbsp;(Link)
@@ -93,7 +98,7 @@ export const RepoDetail: React.FC<Props> = ({ repoDetail }) => {
           return (
             <tr key={currField.key}>
               <td>{currField.label}</td>
-              <td>{valueEl}</td>
+              <td data-testid={`key_${currField.key}`}>{valueEl}</td>
             </tr>
           );
         })}
