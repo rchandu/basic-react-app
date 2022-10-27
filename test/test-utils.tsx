@@ -6,7 +6,7 @@ const AllTheProviders: React.FC<React.PropsWithChildren> = ({ children }) => {
   return <MemoryRouter>{children}</MemoryRouter>;
 };
 
-const customRender = (ui: any, options: any) =>
+const customRender = (ui: any, options?: any) =>
   render(ui, { wrapper: AllTheProviders, ...options });
 
 // re-export everything

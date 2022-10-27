@@ -6,8 +6,16 @@ const mockRepoData = mockGHResponse[0];
 
 describe('RepoListItem', () => {
   it('Should show name', () => {
-    const { getByText } = render(<RepoListItem repo={mockRepoData} />);
+    const { getByText, getByTestId } = render(
+      <RepoListItem repo={mockRepoData} />
+    );
     expect(getByText(mockRepoData.name)).toBeDefined();
+    expect(getByTestId('repoLink').getAttribute('href')).toBe(
+      mockRepoData.html_url
+    );
+    expect(getByTestId('detailLink').getAttribute('href')).toBe(
+      `/repo/godaddy/${mockRepoData.name}`
+    );
   });
 
   it('verify snapshot', () => {

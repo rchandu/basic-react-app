@@ -18,10 +18,19 @@ export const RepoListItem: React.FC<Props> = ({ repo }) => {
         <div>Created on: {new Date(repo.created_at).toDateString()}</div>
       </div>
       <div className="actions">
-        <a href={repo.html_url} target="_blank" className="actionItem">
+        <a
+          data-testid="repoLink"
+          href={repo.html_url}
+          target="_blank"
+          className="actionItem"
+        >
           Repo link
         </a>
-        <Link className="actionItem" to={`/repo/${repo.full_name}`}>
+        <Link
+          className="actionItem"
+          data-testid="detailLink"
+          to={`/repo/${repo.full_name}`}
+        >
           Repo details
         </Link>
       </div>
