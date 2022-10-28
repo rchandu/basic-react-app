@@ -38,6 +38,16 @@ export const VideoPlayerContextProvider: React.FC<PropsWithChildren> = ({
     []
   );
 
+  const clearActiveVideoId = () => {
+    if (!!idRef.current) {
+      // console.log(`%c clearActiveVideoId ${activeVideoId}`, 'color: yellow;');
+      debouncedSetActiveVideoId.cancel();
+      setActiveVideoId(null);
+      idRef.current = null;
+      activeElementRef.current = null;
+    }
+  };
+
   const handleSetActiveVideoId = (id: string, targetEl: HTMLElement) => {
     const idVal = +id;
     // console.log({ idVal, idRef: idRef.current });
@@ -47,16 +57,6 @@ export const VideoPlayerContextProvider: React.FC<PropsWithChildren> = ({
     }
     // console.log('%c handleSetActiveVideoId', 'color: #aab');
     debouncedSetActiveVideoId(idVal, targetEl);
-  };
-
-  const clearActiveVideoId = () => {
-    if (!!idRef.current) {
-      // console.log(`%c clearActiveVideoId ${activeVideoId}`, 'color: yellow;');
-      debouncedSetActiveVideoId.cancel();
-      setActiveVideoId(null);
-      idRef.current = null;
-      activeElementRef.current = null;
-    }
   };
 
   return (
