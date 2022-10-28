@@ -6,7 +6,8 @@ import { VideoPlayerContext } from './VideoPlayerContext';
 export const VideoPlayer = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { activeElement, activeVideoId } = useContext(VideoPlayerContext);
+  const { activeElement, activeVideoId, clearActiveVideoId } =
+    useContext(VideoPlayerContext);
 
   useEffect(() => {
     if (videoRef.current) {

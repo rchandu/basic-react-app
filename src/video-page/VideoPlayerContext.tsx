@@ -1,5 +1,11 @@
 import { debounce } from 'lodash';
-import { createContext, PropsWithChildren, useRef, useState } from 'react';
+import {
+  createContext,
+  PropsWithChildren,
+  useCallback,
+  useRef,
+  useState
+} from 'react';
 
 export interface IVideoPlayerContext {
   activeVideoId: number | null;
@@ -19,27 +25,36 @@ export const VideoPlayerContextProvider: React.FC<PropsWithChildren> = ({
   children
 }) => {
   const [activeVideoId, setActiveVideoId] = useState<number | null>(null);
+  const idRef = useRef<number | null>(null);
   const activeElementRef = useRef<HTMLElement | null>();
 
-  const debouncedSetActiveVideoId = debounce(
-    (id: string, targetEl: HTMLElement) => {
-      // console.log('debouncedSetActiveVideoId', id);
-      setActiveVideoId(+id);
+  const debouncedSetActiveVideoId = useCallback(
+    debounce((id: number, targetEl: HTMLElement) => {
+      // console.info(`%c debouncedSetActiveVideoId ${id}`, 'color: green');
+      setActiveVideoId(id);
+      idRef.current = id;
       activeElementRef.current = targetEl;
-    },
-    1000
+    }, 1000),
+    []
   );
 
   const handleSetActiveVideoId = (id: string, targetEl: HTMLElement) => {
-    // console.log('handleSetActiveVideoId', id);
-    debouncedSetActiveVideoId(id, targetEl);
+    const idVal = +id;
+    // console.log({ idVal, idRef: idRef.current });
+    if (!!idRef.current && idRef.current !== idVal) {
+      // console.log('%c Somethign here bro', 'color: red');
+      clearActiveVideoId();
+    }
+    // console.log('%c handleSetActiveVideoId', 'color: #aab');
+    debouncedSetActiveVideoId(idVal, targetEl);
   };
 
   const clearActiveVideoId = () => {
-    if (!!activeVideoId) {
-      // console.log('clearActiveVideoId');
+    if (!!idRef.current) {
+      // console.log(`%c clearActiveVideoId ${activeVideoId}`, 'color: yellow;');
       debouncedSetActiveVideoId.cancel();
       setActiveVideoId(null);
+      idRef.current = null;
       activeElementRef.current = null;
     }
   };
