@@ -56,6 +56,7 @@ export const VideoPlayer = () => {
         data-id="video-player"
         ref={videoRef}
         autoPlay
+        muted
         controls
         height={200}
         width={200}
