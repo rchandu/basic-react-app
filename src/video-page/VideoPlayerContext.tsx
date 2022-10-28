@@ -23,21 +23,22 @@ export const VideoPlayerContextProvider: React.FC<PropsWithChildren> = ({
 
   const debouncedSetActiveVideoId = debounce(
     (id: string, targetEl: HTMLElement) => {
-      console.log('debouncedSetActiveVideoId2', id);
+      // console.log('debouncedSetActiveVideoId', id);
       setActiveVideoId(+id);
       activeElementRef.current = targetEl;
     },
-    2000
+    1000
   );
 
   const handleSetActiveVideoId = (id: string, targetEl: HTMLElement) => {
-    console.log('handleSetActiveVideoId', id);
+    // console.log('handleSetActiveVideoId', id);
     debouncedSetActiveVideoId(id, targetEl);
   };
 
   const clearActiveVideoId = () => {
     if (!!activeVideoId) {
-      console.log('clearActiveVideoId');
+      // console.log('clearActiveVideoId');
+      debouncedSetActiveVideoId.cancel();
       setActiveVideoId(null);
       activeElementRef.current = null;
     }

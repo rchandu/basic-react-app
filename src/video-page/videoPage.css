@@ -2,7 +2,8 @@
   --color-border: #424244;
   --color-logo: white;
   --color-search: hsl(0, 0%, 7%);
-  --shadow-item: 0px 3px 4px 1px rgba(0, 0, 0, 0.1);
+  --color-shadow: rgba(255, 255, 255, 0.1);
+  --color-shadow2: rgba(200, 200, 200, 0.4);
 }
 
 .videoPage {
@@ -71,7 +72,8 @@
     --color-border: #dedede;
     --color-logo: black;
     --color-search: #f2f2f2;
-    --shadow-item: 0px 3px 6px 1px rgba(8, 8, 8, 0.1);
+    --color-shadow: rgba(0, 0, 0, 0.1);
+    --color-shadow2: rgba(0, 0, 0, 0.4);
   }
 
   .videoPage {
