@@ -6,11 +6,10 @@ import { VideoPlayerContext } from './VideoPlayerContext';
 export const VideoPlayer = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const videoPlayerContext = useContext(VideoPlayerContext);
+  const { activeElement, activeVideoId } = useContext(VideoPlayerContext);
 
   useEffect(() => {
     if (videoRef.current) {
-      const { activeVideoId, activeElement } = videoPlayerContext;
       const activeVideo = sampleVideoData.find(
         (x) => x.personalization_id === activeVideoId
       );
@@ -47,7 +46,7 @@ export const VideoPlayer = () => {
         videoRef.current.pause();
       }
     }
-  }, [videoPlayerContext, videoRef]);
+  }, [videoRef, activeVideoId]);
 
   return (
     <div ref={containerRef} className="videoPlayer" data-id="video-player">
