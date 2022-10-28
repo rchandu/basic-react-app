@@ -26,14 +26,17 @@ export const VideoPlayer = () => {
             containerEl.style.top = thumbnailEl.offsetTop + 'px';
             containerEl.classList.add('videoPlayerActive');
           }
+          videoRef.current.poster = activeVideo.thumbnail_url;
           videoRef.current.src = activeVideo.video_url;
           videoRef.current.play();
         } catch (err) {}
       } else {
         const containerEl = containerRef.current;
         if (containerEl) {
-          // containerEl.style.top = '0px';
-          // containerEl.style.left = '0px';
+          containerEl.style.height = '0px';
+          containerEl.style.width = '0px';
+          containerEl.style.left = '0px';
+          containerEl.style.top = '0px';
           containerEl.classList.remove('videoPlayerActive');
         }
         videoRef.current.src = '';
@@ -53,6 +56,7 @@ export const VideoPlayer = () => {
         data-id="video-player"
         ref={videoRef}
         autoPlay
+        controls
         height={200}
         width={200}
       >
