@@ -1,11 +1,4 @@
-import {
-  createContext,
-  PropsWithChildren,
-  RefObject,
-  useRef,
-  useState
-} from 'react';
-import { IVideoData } from '../data/videosData';
+import { createContext, PropsWithChildren, useRef, useState } from 'react';
 
 function debounce(func: any, timeout = 300) {
   let timer: NodeJS.Timeout;
@@ -19,66 +12,60 @@ function debounce(func: any, timeout = 300) {
 }
 
 export interface IVideoPlayerContext {
-  activeVideo: IVideoData | null;
-  activeThumbnailRef: RefObject<HTMLElement> | null;
-  setCurrentActiveVideo: () => void;
-  setActiveVideo: (value: IVideoData, itemRef: RefObject<HTMLElement>) => void;
-  clearActiveVideo: () => void;
+  activeVideoId: number | null;
+  activeElement: HTMLElement | null;
+  setActiveVideoId: (id: string, target: HTMLElement) => void;
+  clearActiveVideoId: () => void;
 }
 
 export const VideoPlayerContext = createContext<IVideoPlayerContext>({
-  activeVideo: null,
-  activeThumbnailRef: null,
-  setCurrentActiveVideo: () => {},
-  setActiveVideo: () => {},
-  clearActiveVideo: () => {}
+  activeVideoId: null,
+  activeElement: null,
+  setActiveVideoId: () => {},
+  clearActiveVideoId: () => {}
 });
 
 export const VideoPlayerContextProvider: React.FC<PropsWithChildren> = ({
   children
 }) => {
-  const [activeVideo, setActiveVideo] = useState<IVideoData | null>(null);
-  const [activeThumbnailRef, setActiveThumbnailRef] =
-    useState<RefObject<any> | null>(null);
+  const [activeVideoId, setActiveVideoId] = useState<number | null>(null);
+  const activeElementRef = useRef<HTMLElement | null>();
 
-  const setCurrentActiveVideo = () => {
-    // console.log('setActiveVideo2');
-    setActiveVideo(activeVideo);
-    setActiveThumbnailRef(activeThumbnailRef);
-  };
-
-  const debouncedSetActiveVideo = debounce(
-    (video: IVideoData, targetRef: RefObject<HTMLImageElement>) => {
-      // console.log('debouncedSetActiveVideo');
-      setActiveVideo(video);
-      setActiveThumbnailRef(targetRef);
+  // const debouncedSetActiveVideoId = debounce((id: string) => {
+  const debouncedSetActiveVideoId = debounce(
+    (id: string, targetEl: HTMLElement) => {
+      console.log('debouncedSetActiveVideoId2', id);
+      activeElementRef.current = targetEl;
+      setActiveVideoId(+id);
     },
     1000
   );
 
-  const handleClearActiveVideo = () => {
-    // console.log('handleClearActiveVideo');
-    setActiveVideo(null);
-    setActiveThumbnailRef(null);
+  const handleSetActiveVideoId = (id: string, targetEl: HTMLElement) => {
+    console.log('handleSetActiveVideoId', id);
+    // activeElementRef.current = targetEl;
+    // debouncedSetActiveVideoId(id);
+    if (activeVideoId !== +id) {
+      clearActiveVideoId();
+    }
+    debouncedSetActiveVideoId(id, targetEl);
   };
 
-  const handleSetActiveVideo = (
-    video: IVideoData,
-    targetRef: RefObject<HTMLElement>
-  ) => {
-    // console.log('handleSetActiveVideo');
-    handleClearActiveVideo();
-    debouncedSetActiveVideo(video, targetRef);
+  const clearActiveVideoId = () => {
+    if (!!activeVideoId) {
+      console.log('clearActiveVideoId');
+      setActiveVideoId(null);
+      activeElementRef.current = null;
+    }
   };
 
   return (
     <VideoPlayerContext.Provider
       value={{
-        activeVideo,
-        activeThumbnailRef,
-        setCurrentActiveVideo,
-        setActiveVideo: handleSetActiveVideo,
-        clearActiveVideo: handleClearActiveVideo
+        activeVideoId,
+        clearActiveVideoId,
+        setActiveVideoId: handleSetActiveVideoId,
+        activeElement: activeElementRef.current ?? null
       }}
     >
       {children}

@@ -1,6 +1,7 @@
 import { useContext, useEffect, useRef } from 'react';
-import { VideoPlayerContext } from './VideoPlayerContext';
+import { sampleVideoData } from '../data/videosData';
 import './videoPlayer.css';
+import { VideoPlayerContext } from './VideoPlayerContext';
 
 export const VideoPlayer = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -9,16 +10,25 @@ export const VideoPlayer = () => {
 
   useEffect(() => {
     if (videoRef.current) {
-      const { activeVideo, activeThumbnailRef } = videoPlayerContext;
+      const { activeVideoId, activeElement } = videoPlayerContext;
+      const activeVideo = sampleVideoData.find(
+        (x) => x.personalization_id === activeVideoId
+      );
+      console.log('rendering video: ', activeVideoId);
       if (activeVideo) {
+        console.log({ activeVideoId, activeElement });
         try {
-          if (containerRef?.current && activeThumbnailRef?.current) {
-            const thumbnailEl = activeThumbnailRef.current;
+          if (containerRef?.current && activeElement) {
+            const thumbnailEl = activeElement;
             const containerEl = containerRef.current;
+            if (thumbnailEl.clientHeight !== containerEl.clientHeight) {
+              containerEl.style.height = thumbnailEl.clientHeight + 'px';
+            }
+            if (thumbnailEl.clientWidth !== containerEl.clientWidth) {
+              containerEl.style.width = thumbnailEl.clientWidth + 'px';
+            }
             containerEl.style.left = thumbnailEl.offsetLeft + 'px';
             containerEl.style.top = thumbnailEl.offsetTop + 'px';
-            containerEl.style.height = thumbnailEl.clientHeight + 'px';
-            containerEl.style.width = thumbnailEl.clientWidth + 'px';
             containerEl.classList.add('videoPlayerActive');
           }
           videoRef.current.src = activeVideo.video_url;
@@ -27,8 +37,8 @@ export const VideoPlayer = () => {
       } else {
         const containerEl = containerRef.current;
         if (containerEl) {
-          containerEl.style.height = '0px';
-          containerEl.style.width = '0px';
+          // containerEl.style.height = '0px';
+          // containerEl.style.width = '0px';
           containerEl.style.top = '0px';
           containerEl.style.left = '0px';
           containerEl.classList.remove('videoPlayerActive');
@@ -40,21 +50,15 @@ export const VideoPlayer = () => {
   }, [videoPlayerContext, videoRef]);
 
   return (
-    <div
-      ref={containerRef}
-      className="videoPlayer"
-      onMouseOver={(ev) => {
-        // console.log('Mouse on video player');
-        ev.stopPropagation();
-        videoPlayerContext.setCurrentActiveVideo();
-      }}
-      onMouseOut={() => {
-        // console.log('mouseout on videoPlayer');
-        videoPlayerContext.clearActiveVideo();
-      }}
-    >
-      <video ref={videoRef} autoPlay height={200} width={200}>
-        <source type="video/mp4" src={''} width={200} height={200} />
+    <div ref={containerRef} className="videoPlayer" data-id="video-player">
+      <video
+        data-id="video-player"
+        ref={videoRef}
+        autoPlay
+        height={200}
+        width={200}
+      >
+        <source type="video/mp4" src="" width={200} height={200} />
       </video>
     </div>
   );

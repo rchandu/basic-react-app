@@ -1,3 +1,10 @@
+:root {
+  --color-border: #424244;
+  --color-logo: white;
+  --color-search: hsl(0, 0%, 7%);
+  --shadow-item: 0px 3px 4px 1px rgba(0, 0, 0, 0.1);
+}
+
 .videoPage {
   display: flex;
   flex-direction: column;
@@ -13,15 +20,15 @@
   align-items: center;
   padding: 0 16px;
   align-items: stretch;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .videoPageHeaderIcon {
   height: 20px;
-  fill: white;
   width: 90px;
   padding: 18px 14px 18px 16px;
   flex: none;
+  fill: var(--color-logo);
 }
 
 .videoPageHeaderSearch {
@@ -35,6 +42,7 @@
   height: 50%;
   width: 70%;
   background-color: hsl(0, 0%, 7%);
+  background-color: var(--color-search);
   padding: 2px 6px;
   border: 1px solid hsl(0, 0%, 18.82%);
   border-radius: 2px;
@@ -56,4 +64,17 @@
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-border: #dedede;
+    --color-logo: black;
+    --color-search: #f2f2f2;
+    --shadow-item: 0px 3px 6px 1px rgba(8, 8, 8, 0.1);
+  }
+
+  .videoPage {
+    background-color: unset;
+  }
 }
