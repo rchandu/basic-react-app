@@ -1,7 +1,21 @@
 .videoPlayer {
-  height: 200;
-  width: 200;
+  height: 0px;
+  width: 0px;
   position: absolute;
   top: 0;
   left: 0;
+  display: block;
+  opacity: 0;
+  transition: opacity 200ms ease-in, transform 160ms ease-out 200ms;
+}
+
+.videoPlayerActive {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+.videoPlayer video {
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
 }
